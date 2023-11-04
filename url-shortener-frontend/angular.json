@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/url-shortener",
+            "outputPath": "dist/url-shortener-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -61,10 +61,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "url-shortener:build:production"
+              "browserTarget": "url-shortener-frontend:build:production"
             },
             "development": {
-              "browserTarget": "url-shortener:build:development"
+              "browserTarget": "url-shortener-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -72,7 +72,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "url-shortener:build"
+            "browserTarget": "url-shortener-frontend:build"
           }
         },
         "test": {
