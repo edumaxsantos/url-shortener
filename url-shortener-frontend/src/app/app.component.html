@@ -1,0 +1,8 @@
+<div class="columns is-flex is-align-items-center is-flex-direction-column mt-5">
+  <fieldset class="box">
+    <h1 class="title">Folhabot Url Shortener</h1>
+    <input class="input my-1" type="text" placeholder="Url" [(ngModel)]="url">
+    <button class="button is-black my-1" (click)="createShortenedUrl()">Shorten</button>
+    <p *ngIf="shortenedUrl.length">Shortened URL: <a [href]="shortenedUrl" target="_blank">{{shortenedUrl}}</a></p>
+  </fieldset>
+</div>

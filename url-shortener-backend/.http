@@ -1,0 +1,30 @@
+### Remove shortened url
+DELETE http://localhost:8080/93ac66
+Accept: application/json
+
+### INVALID hashed
+GET http://localhost:8080/124asc
+Accept: application/json
+
+### VALID hashed
+# @no-redirect
+GET http://localhost:8080/93ac66
+Accept: application/json
+
+### WRONG ONE
+POST http://localhost:8080/
+Content-Type: application/json
+
+{
+  "wrong_key": "https://twitch.tv/folha_de_sp"
+}
+
+### WORKING ONE
+POST http://localhost:8080/
+Content-Type: application/json
+
+{
+  "url": "https://twitch.tv/folha_de_sp"
+}
+
+###
