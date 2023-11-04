@@ -14,10 +14,6 @@ on:
   pull_request:
     branches: [ "master" ]
 
-defaults:
-  run:
-    working-directory: ./url-shortener-backend
-
 jobs:
   build:
 
