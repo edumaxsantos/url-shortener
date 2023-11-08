@@ -1,15 +1,17 @@
-FROM node:16-alpine AS build
+FROM node:18-alpine AS build
 
 WORKDIR /app
 
-COPY . .
+COPY package*.json ./
 
 RUN npm install
+
+COPY . .
 
 RUN npm run build
 
 FROM nginx:alpine
 
-COPY --from=build /app/dist/url-shortener-frontend /usr/share/nginx/html
+COPY --from=build /app/dist/url-shortener-frontend/browser /usr/share/nginx/html
 
 EXPOSE 80

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "url-shortener": {
+    "url-shortener-frontend": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -11,11 +11,11 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/url-shortener-frontend",
             "index": "src/index.html",
-            "main": "src/main.ts",
+            "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -35,8 +35,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "11mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -47,9 +47,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -61,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "url-shortener-frontend:build:production"
+              "buildTarget": "url-shortener-frontend:build:production"
             },
             "development": {
-              "browserTarget": "url-shortener-frontend:build:development"
+              "buildTarget": "url-shortener-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -72,7 +70,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "url-shortener-frontend:build"
+            "buildTarget": "url-shortener-frontend:build"
           }
         },
         "test": {
@@ -93,6 +91,60 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/url-shortener-frontend/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@angular-devkit/build-angular:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "url-shortener-frontend:build:development",
+              "serverTarget": "url-shortener-frontend:server:development"
+            },
+            "production": {
+              "browserTarget": "url-shortener-frontend:build:production",
+              "serverTarget": "url-shortener-frontend:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@angular-devkit/build-angular:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "url-shortener-frontend:build:production",
+              "serverTarget": "url-shortener-frontend:server:production"
+            },
+            "development": {
+              "browserTarget": "url-shortener-frontend:build:development",
+              "serverTarget": "url-shortener-frontend:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
